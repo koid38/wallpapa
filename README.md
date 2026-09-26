@@ -6,7 +6,7 @@ Minimal phone wallpapers, 1440×3168. Rendered procedurally with numpy (linear l
 |---|---|
 | `01-fluted` | amber sun half-sunk behind reeded glass |
 | `02-frost` | terracotta disc behind a frosted glass capsule |
-| `03-lens` | ray-traced glass ball bending ruled lines |
+| `03-clear` | frosted pane over a cobalt disc, one round window wiped clean |
 | `04-aura` | defocused cool glow inside a hairline ring |
 
 ![preview](preview.png)
