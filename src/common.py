@@ -113,3 +113,15 @@ def save(img, path, grain=0.006, seed=0):
     out = (np.clip(s, 0, 1) * 255 + 0.5).astype(np.uint8)
     Image.fromarray(out).save(path, optimize=True)
     return out
+
+
+def fbm(scales, seed=0, shape=(H, W)):
+    """Smooth value noise: normalized sum of blurred white noise, weights per sigma."""
+    rng = np.random.default_rng(seed)
+    out = np.zeros(shape, np.float32)
+    for sigma, wgt in scales:
+        p = int(3 * sigma) + 2  # oversize, so edge padding never shows
+        n = rng.normal(0, 1, (shape[0] + 2 * p, shape[1] + 2 * p)).astype(np.float32)
+        n = gblur(n, sigma)[p:-p, p:-p]
+        out += wgt * n / (n.std() + 1e-8)
+    return out
