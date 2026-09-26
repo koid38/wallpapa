@@ -125,3 +125,41 @@ def fbm(scales, seed=0, shape=(H, W)):
         n = gblur(n, sigma)[p:-p, p:-p]
         out += wgt * n / (n.std() + 1e-8)
     return out
+
+
+FONTS = __import__("os").path.join(__import__("os").path.dirname(__file__), "..", "fonts")
+
+
+def text_mask(txt, font, size, cx, cy, tracking=0.0):
+    """Alpha mask of a line of text, centered on (cx, cy) by cap height.
+    tracking is extra space between letters, in px."""
+    from PIL import ImageDraw, ImageFont
+    f = ImageFont.truetype(f"{FONTS}/{font}", size)
+    widths = [f.getlength(ch) for ch in txt]
+    total = sum(widths) + tracking * (len(txt) - 1)
+    cap = -f.getbbox("H", anchor="ls")[1]
+    im = Image.new("L", (W, H), 0)
+    d = ImageDraw.Draw(im)
+    xx = cx - total / 2
+    for ch, w in zip(txt, widths):
+        d.text((xx, cy + cap / 2), ch, font=f, fill=255, anchor="ls")
+        xx += w + tracking
+    return np.asarray(im, np.float32) / 255
+
+
+def star_mask(cx, cy, r, inner=0.40, rot=-np.pi / 2, ss=4):
+    """Anti-aliased five-point star, supersampled in its own bounding box."""
+    from PIL import ImageDraw
+    n = int(2 * r + 4)
+    im = Image.new("L", (n * ss, n * ss), 0)
+    pts = []
+    for i in range(10):
+        rr = r if i % 2 == 0 else r * inner
+        a = rot + i * np.pi / 5
+        pts.append(((n / 2 + rr * np.cos(a)) * ss, (n / 2 + rr * np.sin(a)) * ss))
+    ImageDraw.Draw(im).polygon(pts, fill=255)
+    small = np.asarray(im.resize((n, n), Image.LANCZOS), np.float32) / 255
+    out = np.zeros((H, W), np.float32)
+    x0, y0 = int(round(cx - n / 2)), int(round(cy - n / 2))
+    out[y0:y0 + n, x0:x0 + n] = small
+    return out
