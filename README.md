@@ -14,10 +14,15 @@ Minimal phone wallpapers, 1440×3168. Rendered procedurally with numpy (linear l
 | `08-field` | two soft colour fields, after Rothko's rust and blue |
 | `09-albiceleste` | Messi's 10 as frosted glass over Argentina stripes, three stars |
 | `10-blaugrana` | Messi's 10 cut from Barça stripes, glowing on night blue |
+| `11-eclipse` | black moon, soft streaming corona, one diamond bead |
+| `12-saturn` | sand-toned planet wearing rings of frosted glass |
+| `13-orbits` | hairline orbits from above, planets as frosted glass discs |
+| `14-galaxy` | a tilted spiral made only of blur, over crisp stars |
 
 ![preview](preview.png)
 ![preview 2](preview-2.png)
 ![preview 3](preview-3.png)
+![preview 4](preview-4.png)
 
 Fonts in `fonts/` are Big Shoulders and Outfit (SIL Open Font License).
 
