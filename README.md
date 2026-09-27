@@ -12,7 +12,7 @@ Minimal phone wallpapers, 1440×3168. Rendered procedurally with numpy (linear l
 | `06-halftone` | a moon printed as a rotated dot screen |
 | `07-niche` | arched recess in a plaster wall, a band of late sun |
 | `08-field` | two soft colour fields, after Rothko's rust and blue |
-| `09-albiceleste` | Messi's 10 on frosted Argentina stripes, three stars |
+| `09-albiceleste` | Messi's 10 as frosted glass over Argentina stripes, three stars |
 | `10-blaugrana` | Messi's 10 cut from Barça stripes, glowing on night blue |
 
 ![preview](preview.png)
